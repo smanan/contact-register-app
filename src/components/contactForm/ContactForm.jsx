@@ -1,6 +1,6 @@
 import React from "react";
 
-const ContactForm = (props) => {
+const ContactForm = ({contacts , addContacts}) => {
   const initialValues = { full_name: "", phone_number: "" };
   const [form, setForm] = React.useState(initialValues);
   const onChangeInput = (e) => {
@@ -11,11 +11,12 @@ const ContactForm = (props) => {
     if (form.full_name === "" || form.phone_number === "") {
       alert("Please Enter The Data");
     }
+    addContacts([...contacts , form])
   };
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <div>
-        <input type="text" name="full_name" placeholder="Full name" />
+        <input type="text" name="full_name" placeholder="Full name" onChange={onChangeInput} />
       </div>
 
       <div>
@@ -25,6 +26,7 @@ const ContactForm = (props) => {
           placeholder="Phone Number"
           maxLength={10}
           minLength={10}
+          onChange={onChangeInput}
         />
       </div>
 
